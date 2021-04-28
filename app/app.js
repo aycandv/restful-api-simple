@@ -15,11 +15,13 @@ app.get("/", (req, res) => {
     res.send("Welcome home");
 });
 
-// Connect to DB
-mongoose.connect(process.env.DB_CONNECTION, 
-    { useNewUrlParser: true , useUnifiedTopology: true},  () => {
-    console.log("Connected to DB!");
-})
 
-// Start to listen on port 3000
-app.listen(3000);
+app.listen(3000, async () => {
+    console.log(`Server started...`);
+    console.log(`Connecting to DB...`);
+    await mongoose.connect("mongodb://mongodb:27017/", { 
+        useNewUrlParser: true , 
+        useUnifiedTopology: true},  () => {
+        console.log("Connected to DB!");
+    })
+})
