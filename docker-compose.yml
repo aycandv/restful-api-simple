@@ -1,0 +1,21 @@
+version: "3.4"
+
+services: 
+    mongodb:
+        container_name: mongo-rest
+        image: mongo
+        restart: always
+        volumes: 
+            - rest-api-data:/data/db
+        ports: 
+            - 27017:27017
+        
+
+    rest-api:
+        container_name: rest-api
+        build: .
+        ports: 
+            - 3000:3000
+
+volumes: 
+    rest-api-data:
